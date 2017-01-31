@@ -28,12 +28,9 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
         recording(x: false)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
+        stopRecordButton.imageView?.contentMode = .scaleAspectFit
         super.viewWillAppear(animated)
     }
     
@@ -83,15 +80,10 @@ class RecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func updateUI(recording: Bool = false) {
-        if !recording {
-            recordingLabel.text = "Tap to Record"
-            recordButton.isEnabled = true
-            stopRecordButton.isEnabled = false
-        } else {
-            recordingLabel.text = "Recording in Progress"
-            recordButton.isEnabled = false
-            stopRecordButton.isEnabled = true
-        }
+        recordingLabel.text = recording ? "Recording in progress" : "Tap to record"
+        recordButton.isEnabled = recording ? false: true
+        stopRecordButton.isEnabled = recording ? true : false
+        
     }
 
 }
